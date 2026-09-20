@@ -12,7 +12,8 @@ const E=[
 ["۴","سیستم شناسایی و مدیریت اقلام با لیبل‌های رنگی","چهار وضعیت سبز، قرمز، آبی و بنفش.",`<p>وضعیت اقلام توسط <b>واحد اقلام ورودی</b> و با برچسب و لیبل شناسایی مشخص می‌شود.</p><h4>🟢 سبز؛ قابل استفاده</h4><p>بدون مشکل و از مسیر معمول تحویل می‌شوند.</p><h4>🔴 قرمز؛ غیرقابل استفاده یا ضایعات</h4><p>غیرقابل استفاده‌اند و برای برگشت به تأمین‌کننده یا ضایعات کردن باید پیگیری شوند.</p><h4>🔵 آبی؛ در حال بررسی و تست</h4><p>در حال بررسی هستند و به یکی از وضعیت‌های قرمز یا بنفش تبدیل می‌شوند.</p><h4>🟣 بنفش؛ قابل استفاده کنترل‌شده</h4><p>اقلامی هستند که از وضعیت آبی مورد تأیید یا مجاز به استفاده شده‌اند اما باید مشخص و کنترل‌شده مصرف شوند.</p>`]
 ];
 function draw(a,id){document.getElementById(id).innerHTML=a.map((x,i)=>`<article class="post"><small>مطلب ${x[0]}</small><h3>${x[1]}</h3><p>${x[2]}</p><button class="read" data-a="${id}" data-i="${i}">مشاهده مطلب ←</button></article>`).join("")}
-draw(W,"W");draw(E,"E");
+draw(W,"warehousePosts");
+draw(E,"experiencePosts");
 const m=document.getElementById("modal"),mt=document.getElementById("mt"),mb=document.getElementById("mb"),mn=document.getElementById("mn");
 document.addEventListener("click",e=>{if(!e.target.matches(".read"))return;let a=e.target.dataset.a==="W"?W:E,x=a[+e.target.dataset.i];mn.textContent="مطلب "+x[0];mt.textContent=x[1];mb.innerHTML=x[3];m.classList.add("open")});
 document.getElementById("close").onclick=()=>m.classList.remove("open");m.onclick=e=>{if(e.target===m)m.classList.remove("open")};
