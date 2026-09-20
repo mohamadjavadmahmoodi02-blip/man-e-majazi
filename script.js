@@ -535,9 +535,200 @@ const E = [
 
 ];
 
-function draw(a,id){document.getElementById(id).innerHTML=a.map((x,i)=>`<article class="post"><small>مطلب ${x[0]}</small><h3>${x[1]}</h3><p>${x[2]}</p><button class="read" type="button" data-source="${id}" data-index="${i}">مشاهده مطلب ←</button></article>`).join("")}
-draw(W,"warehousePosts");draw(E,"experiencePosts");
-const m=document.getElementById("modal"),mt=document.getElementById("mt"),mb=document.getElementById("mb"),mn=document.getElementById("mn"),close=document.getElementById("close");
-function closeModal(){m.classList.remove("open");m.setAttribute("aria-hidden","true");document.body.style.overflow=""}
-document.addEventListener("click",e=>{const b=e.target.closest(".read");if(!b)return;const a=b.dataset.source==="warehousePosts"?W:E,x=a[Number(b.dataset.index)];if(!x)return;mn.textContent="مطلب "+x[0];mt.textContent=x[1];mb.innerHTML=x[3];m.classList.add("open");m.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"});
-close.addEventListener("click",closeModal);m.addEventListener("click",e=>{if(e.target===m)closeModal()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+/* =========================================================
+   منِ مجازی | نمایش مطالب
+   ========================================================= */
+
+/*
+  تصاویر بخش انبارداری:
+  assets/warehouse-1.jpg
+  assets/warehouse-2.jpg
+  assets/warehouse-3.jpg
+  assets/warehouse-4.jpg
+  assets/warehouse-5.jpg
+
+  تصاویر بخش تجربه:
+  assets/experience-1.jpg
+  assets/experience-2.jpg
+  assets/experience-3.jpg
+  assets/experience-4.jpg
+*/
+
+
+function draw(posts, id) {
+
+  const container = document.getElementById(id);
+
+  if (!container) return;
+
+  const isWarehouse = id === "warehousePosts";
+
+  container.innerHTML = posts.map((post, index) => {
+
+    const imageNumber = index + 1;
+
+    const imagePath = isWarehouse
+      ? `assets/warehouse-${imageNumber}.jpg`
+      : `assets/experience-${imageNumber}.jpg`;
+
+    return `
+      <article class="post">
+
+        <img
+          class="warehouse-image"
+          src="${imagePath}"
+          alt="${post[1]}"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+
+        <small>
+          مطلب ${post[0]}
+        </small>
+
+        <h3>
+          ${post[1]}
+        </h3>
+
+        <p>
+          ${post[2]}
+        </p>
+
+        <button
+          class="read"
+          type="button"
+          data-source="${id}"
+          data-index="${index}"
+        >
+          مشاهده مطلب ←
+        </button>
+
+      </article>
+    `;
+
+  }).join("");
+}
+
+
+/* =========================================================
+   ساخت کارت‌های مطالب
+   ========================================================= */
+
+draw(W, "warehousePosts");
+
+draw(E, "experiencePosts");
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("mt");
+const modalBody = document.getElementById("mb");
+const modalNumber = document.getElementById("mn");
+const closeButton = document.getElementById("close");
+
+
+/* باز کردن مطلب */
+
+document.addEventListener("click", function (event) {
+
+  const button = event.target.closest(".read");
+
+  if (!button) return;
+
+  const source = button.dataset.source;
+
+  const index = Number(button.dataset.index);
+
+  const posts =
+    source === "warehousePosts"
+      ? W
+      : E;
+
+  const post = posts[index];
+
+  if (!post) return;
+
+
+  modalNumber.textContent =
+    `مطلب ${post[0]}`;
+
+  modalTitle.textContent =
+    post[1];
+
+  modalBody.innerHTML =
+    post[3];
+
+
+  modal.classList.add("open");
+
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+});
+
+
+/* =========================================================
+   بستن پنجره مطلب
+   ========================================================= */
+
+function closeModal() {
+
+  modal.classList.remove("open");
+
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.style.overflow =
+    "";
+}
+
+
+if (closeButton) {
+
+  closeButton.addEventListener(
+    "click",
+    closeModal
+  );
+
+}
+
+
+/* کلیک روی فضای بیرون پنجره */
+
+if (modal) {
+
+  modal.addEventListener(
+    "click",
+    function (event) {
+
+      if (event.target === modal) {
+        closeModal();
+      }
+
+    }
+  );
+
+}
+
+
+/* بستن با کلید Escape */
+
+document.addEventListener(
+  "keydown",
+  function (event) {
+
+    if (event.key === "Escape") {
+      closeModal();
+    }
+
+  }
+);
