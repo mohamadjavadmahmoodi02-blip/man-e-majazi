@@ -647,6 +647,8 @@ function openModal(item) {
   modal.setAttribute("aria-hidden", "false");
 
   document.body.style.overflow = "hidden";
+  // برگشت اسکرول متن به ابتدای مطلب
+  modalBody.scrollTop = 0;
 }
 
 
