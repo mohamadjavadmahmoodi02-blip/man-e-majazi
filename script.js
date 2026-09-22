@@ -861,3 +861,7 @@ if (themeButton) {
 /* =========================================================
    پایان script.js
    ========================================================= */
+
+console.log("SCRIPT LOADED");
+console.log("E =", E);
+console.log("experiencePosts =", document.getElementById("experiencePosts"));
