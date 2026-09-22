@@ -3256,58 +3256,84 @@ img {
 ================================================== */
 /* ==================================================
    CAREER JOURNEY
-   هماهنگ با طراحی اصلی سایت
+   هماهنگ با تم اصلی MAN-E-MAJAZI
 ================================================== */
 
 .journey-section {
   position: relative;
-  padding: 110px 20px;
-  background: var(--section-bg, #f7f4ef);
+  padding: 110px 0;
   overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(0, 150, 255, 0.055),
+      transparent 42%
+    ),
+    #030a11;
+
+  border-top:
+    1px solid rgba(100, 200, 255, 0.08);
+
+  border-bottom:
+    1px solid rgba(100, 200, 255, 0.08);
 }
 
 
-/* عنوان بخش */
+/* ==================================================
+   CONTAINER
+================================================== */
+
+.journey-container {
+  width: min(
+    calc(100% - 80px),
+    var(--container)
+  );
+
+  margin: auto;
+}
+
+
+/* ==================================================
+   HEADING
+================================================== */
 
 .journey-section .section-heading {
-  margin-bottom: 70px;
+  margin-bottom: 65px;
 }
 
 .journey-section .section-heading span {
-  color: var(--accent-color, #8b6f47);
+  color: var(--text);
 }
 
 .journey-section .section-heading small {
-  color: var(--text-muted, #999);
+  color: #7792a7;
 }
 
 .journey-section .section-heading p {
-  color: var(--text-color, #555);
+  color: #7892a7;
 }
 
 
-/* کانتینر */
-
-.journey-container {
-  width: min(1120px, 100%);
-  margin: 0 auto;
-}
-
-
-/* تایم‌لاین */
+/* ==================================================
+   TIMELINE
+================================================== */
 
 .journey-timeline {
   position: relative;
+
   display: flex;
   flex-direction: column;
-  gap: 28px;
+
+  gap: 25px;
 }
 
 
-/* خط وسط */
+/* خط مرکزی */
 
 .journey-timeline::before {
   content: "";
+
   position: absolute;
 
   top: 35px;
@@ -3317,56 +3343,166 @@ img {
 
   width: 1px;
 
-  background: rgba(139, 111, 71, 0.22);
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 217, 255, 0.35),
+      rgba(0, 217, 255, 0.18),
+      transparent
+    );
 
   transform: translateX(50%);
 }
 
 
-/* هر مرحله */
+/* ==================================================
+   JOURNEY ITEM
+================================================== */
 
 .journey-item {
   position: relative;
 
   display: grid;
-  grid-template-columns: 1fr 90px 1fr;
+
+  grid-template-columns:
+    1fr 90px 1fr;
 
   align-items: center;
 
-  min-height: 150px;
+  min-height: 155px;
 
   z-index: 1;
 }
 
 
-/* کارت */
+/* ==================================================
+   CARD
+================================================== */
 
 .journey-card {
+
+  position: relative;
+
   width: 100%;
 
   padding: 28px 30px;
 
-  background: rgba(255, 255, 255, 0.72);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8, 24, 37, 0.90),
+      rgba(3, 12, 20, 0.82)
+    );
 
-  border: 1px solid rgba(139, 111, 71, 0.12);
+  border:
+    1px solid rgba(80, 180, 255, 0.20);
 
-  border-radius: 18px;
+  border-radius: 14px;
+
+  backdrop-filter: blur(14px);
 
   box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.045);
+    0 20px 45px rgba(0, 0, 0, 0.25);
 
-  backdrop-filter: blur(8px);
+  overflow: hidden;
 
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    transform 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
 
-/* کارت‌ها یکی در میان */
+/* خط نور بالای کارت */
+
+.journey-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--cyan),
+      transparent
+    );
+
+  transform:
+    scaleX(0);
+
+  transition:
+    transform 0.4s ease;
+}
+
+
+/* نور داخلی */
+
+.journey-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(0, 217, 255, 0.08),
+      transparent 55%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 0.4s ease;
+
+  pointer-events: none;
+}
+
+
+/* Hover */
+
+.journey-card:hover {
+
+  transform:
+    translateY(-7px);
+
+  border-color:
+    rgba(0, 217, 255, 0.55);
+
+  box-shadow:
+    0 25px 55px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(0, 217, 255, 0.08);
+}
+
+.journey-card:hover::before {
+
+  transform:
+    scaleX(1);
+}
+
+.journey-card:hover::after {
+
+  opacity: 1;
+}
+
+
+/* ==================================================
+   LEFT / RIGHT CARDS
+================================================== */
 
 .journey-item:nth-child(odd) .journey-card {
+
   grid-column: 1;
   grid-row: 1;
 
@@ -3374,6 +3510,7 @@ img {
 }
 
 .journey-item:nth-child(even) .journey-card {
+
   grid-column: 3;
   grid-row: 1;
 
@@ -3381,9 +3518,12 @@ img {
 }
 
 
-/* شماره / سال */
+/* ==================================================
+   YEAR / NUMBER
+================================================== */
 
 .journey-year {
+
   grid-column: 2;
   grid-row: 1;
 
@@ -3393,120 +3533,160 @@ img {
   margin: 0 auto;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 50%;
 
-  background: var(--card-bg, #ffffff);
+  background:
+    linear-gradient(
+      145deg,
+      #081925,
+      #020b12
+    );
 
-  border: 2px solid rgba(139, 111, 71, 0.45);
+  border:
+    2px solid rgba(0, 217, 255, 0.55);
 
-  color: var(--accent-color, #8b6f47);
+  color:
+    var(--cyan);
 
-  font-size: 15px;
+  font-size: 13px;
+
   font-weight: 700;
 
   text-align: center;
 
   box-shadow:
-    0 8px 22px rgba(0, 0, 0, 0.06);
+    0 0 0 7px rgba(0, 217, 255, 0.025),
+    0 0 25px rgba(0, 217, 255, 0.12);
 
   z-index: 3;
+
+  transition:
+    0.35s ease;
 }
 
 
-/* عنوان کارت */
+/* نقطه وسط */
+
+.journey-year::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background:
+    var(--cyan);
+
+  box-shadow:
+    0 0 12px var(--cyan);
+
+}
+
+
+/* Hover سال */
+
+.journey-item:hover .journey-year {
+
+  border-color:
+    var(--cyan);
+
+  box-shadow:
+    0 0 0 8px rgba(0, 217, 255, 0.04),
+    0 0 30px rgba(0, 217, 255, 0.25);
+
+  transform:
+    scale(1.06);
+}
+
+
+/* ==================================================
+   CARD TYPOGRAPHY
+================================================== */
 
 .journey-card h3 {
-  margin: 0 0 14px;
 
-  color: var(--heading-color, #292929);
+  margin:
+    0 0 12px;
+
+  color:
+    var(--text);
 
   font-size: 20px;
 
   line-height: 1.8;
+
+  position: relative;
+
+  z-index: 2;
 }
 
-
-/* متن */
 
 .journey-card p {
-  margin: 0 0 10px;
 
-  color: var(--text-color, #666);
+  margin:
+    0 0 10px;
 
-  font-size: 15px;
+  color:
+    #9db2c4;
 
-  line-height: 2.1;
+  font-size: 14px;
+
+  line-height: 2.15;
+
+  position: relative;
+
+  z-index: 2;
 }
 
+
 .journey-card p:last-child {
+
   margin-bottom: 0;
 }
 
 
-/* متن برجسته */
-
 .journey-card strong {
-  color: var(--accent-color, #8b6f47);
+
+  color:
+    var(--cyan);
 
   font-weight: 700;
 }
 
 
-/* Hover */
-
-.journey-card:hover {
-  transform: translateY(-4px);
-
-  border-color:
-    rgba(139, 111, 71, 0.28);
-
-  box-shadow:
-    0 16px 38px rgba(0, 0, 0, 0.075);
-}
-
-
 /* ==================================================
-   DARK MODE
+   SPECIAL EMPHASIS
 ================================================== */
 
-body.dark-mode .journey-section {
-  background: #171717;
-}
+.journey-card .journey-highlight {
 
-body.dark-mode .journey-timeline::before {
-  background: rgba(255, 255, 255, 0.14);
-}
+  display: inline-block;
 
-body.dark-mode .journey-card {
-  background: rgba(35, 35, 35, 0.82);
+  margin-top: 10px;
 
-  border-color:
-    rgba(255, 255, 255, 0.08);
-}
+  padding:
+    5px 12px;
 
-body.dark-mode .journey-card h3 {
-  color: #f3f3f3;
-}
+  border:
+    1px solid rgba(0, 217, 255, 0.20);
 
-body.dark-mode .journey-card p {
-  color: #bdbdbd;
-}
+  border-radius: 20px;
 
-body.dark-mode .journey-year {
-  background: #232323;
-
-  color: #d2ae78;
-
-  border-color:
-    rgba(210, 174, 120, 0.5);
-}
-
-body.dark-mode .journey-timeline::before {
   background:
-    rgba(210, 174, 120, 0.22);
+    rgba(0, 217, 255, 0.05);
+
+  color:
+    var(--cyan);
+
+  font-size: 11px;
 }
 
 
@@ -3517,47 +3697,102 @@ body.dark-mode .journey-timeline::before {
 @media (max-width: 768px) {
 
   .journey-section {
-    padding: 80px 16px;
+
+    padding:
+      80px 0;
+  }
+
+  .journey-container {
+
+    width:
+      calc(100% - 30px);
   }
 
   .journey-section .section-heading {
-    margin-bottom: 50px;
+
+    margin-bottom: 45px;
   }
 
   .journey-timeline {
-    gap: 22px;
+
+    gap: 20px;
+
+    padding-right: 0;
   }
+
+
+  /* خط عمودی سمت راست */
 
   .journey-timeline::before {
+
     right: 27px;
 
-    top: 30px;
-    bottom: 30px;
+    top: 28px;
+    bottom: 28px;
 
     transform: none;
+
+    background:
+      linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 217, 255, 0.35),
+        rgba(0, 217, 255, 0.15),
+        transparent
+      );
   }
 
+
+  /* آیتم */
+
   .journey-item {
+
     display: grid;
 
-    grid-template-columns: 56px 1fr;
+    grid-template-columns:
+      56px 1fr;
 
     gap: 16px;
 
     min-height: auto;
+
+    align-items: start;
   }
 
+
+  /* سال */
+
   .journey-year {
+
     grid-column: 1 !important;
     grid-row: 1 !important;
 
     width: 56px;
     height: 56px;
 
-    font-size: 12px;
+    margin: 0;
+
+    font-size: 10px;
 
     position: relative;
+
+    background:
+      linear-gradient(
+        145deg,
+        #081925,
+        #020b12
+      );
   }
+
+
+  .journey-year::after {
+
+    width: 6px;
+    height: 6px;
+  }
+
+
+  /* کارت */
 
   .journey-item:nth-child(odd) .journey-card,
   .journey-item:nth-child(even) .journey-card {
@@ -3569,20 +3804,80 @@ body.dark-mode .journey-timeline::before {
   }
 
   .journey-card {
-    padding: 22px 20px;
 
-    border-radius: 16px;
+    padding:
+      20px 18px;
+
+    border-radius:
+      13px;
   }
+
 
   .journey-card h3 {
-    font-size: 17px;
+
+    font-size: 16px;
+
+    line-height: 1.8;
   }
 
-  .journey-card p {
-    font-size: 14px;
 
-    line-height: 2;
+  .journey-card p {
+
+    font-size: 13px;
+
+    line-height: 2.05;
   }
 
 }
-  
+
+
+/* ==================================================
+   VERY SMALL MOBILE
+================================================== */
+
+@media (max-width: 480px) {
+
+  .journey-container {
+
+    width:
+      calc(100% - 24px);
+  }
+
+  .journey-item {
+
+    grid-template-columns:
+      48px 1fr;
+
+    gap: 12px;
+  }
+
+  .journey-timeline::before {
+
+    right: 23px;
+  }
+
+  .journey-year {
+
+    width: 48px;
+    height: 48px;
+
+    font-size: 9px;
+  }
+
+  .journey-card {
+
+    padding:
+      18px 15px;
+  }
+
+  .journey-card h3 {
+
+    font-size: 15px;
+  }
+
+  .journey-card p {
+
+    font-size: 12px;
+  }
+
+}
